@@ -1,0 +1,59 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html{
+  height: 100%;
+}
+
+body{
+  height: 100%;
+}
+ h1, h2, h3, h4, h5, h6{
+   margin: 0;
+ }
+ul, li{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a{
+  text-decoration: none;
+}
+
+p{
+  margin: 0;
+}
+
+header{
+  display: grid;
+  grid-template-columns: 1fr;
+  background: blue;
+}
+main{
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  grid-auto-rows: 1fr 50px;
+}
+.messages{
+  border: 1px red solid;
+}
+.userlist{
+  border: 1px black solid;
+}
+.messageInput{
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: green;
+  height: 50px;
+}
+.messageInput__input{
+  border: none;
+}
