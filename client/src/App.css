@@ -38,9 +38,11 @@ main{
   grid-auto-rows: 1fr 50px;
 }
 .messages{
+  grid-area: 'messages';
   border: 1px red solid;
 }
 .userlist{
+  grid-area: 'userlist';
   border: 1px black solid;
 }
 .messageInput{

@@ -15,7 +15,7 @@ class MessagInput extends React.Component {
   }
   sendMessage=(e)=>{
     e.preventDefault();
-    console.log(this.state.message);
+    this.props.sendMessage(this.state.message)
   }
   render () {
 

@@ -11,23 +11,44 @@ class App extends Component {
   constructor(props){
   super(props);
     this.state={
-    nickname:'zeta',
-    roomName:''
+    nickname:'',
+    roomId:'',
+    users:[]
     }
     this.registerUser = this.registerUser.bind(this);
 }
   registerUser({nickname}){
+    //save user && send user nickname and id to server
+  socket.emit('addUser', (nickname))
+
     this.setState({
+      roomId:socket.id,
       nickname
     })
   }
-  
+
+sendMessage = (message)=>{
+  const {roomId} = this.state;
+  socket.emit('msg', ({message, roomId}))
+}
+
+joinRoom = (roomId)=>{
+  this.setState({
+    roomId
+  })
+  socket.emit('join', roomId)
+}
   componentDidMount(){
-    console.log(socket);
-    socket.on('msg', msg => console.log(msg))
+
+    const {roomId} = this.state;
+    console.log(roomId);
+    socket.on(roomId, (message) =>{
+       console.log(message)
+     })
   }
   render() {
-  const layout = this.state.nickname ? <Layout nickname={this.state.nickname} socket={socket} /> : <Register registerUser ={this.registerUser}/>
+  const {nickname, users} = this.state;
+  const layout = this.state.nickname ? <Layout nickname={nickname} users={users} socket={socket} joinRoom={this.joinRoom} sendMessage={this.sendMessage} /> : <Register registerUser ={this.registerUser}/>
     return (
       <div className="App">
         {layout}
