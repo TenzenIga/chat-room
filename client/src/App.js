@@ -42,9 +42,11 @@ joinRoom = (roomId)=>{
 
     const {roomId} = this.state;
     console.log(roomId);
-    socket.on(roomId, (message) =>{
+    socket.on('msg', (message) =>{
        console.log(message)
      })
+
+     socket.on('join', (message) =>console.log(message))
   }
   render() {
   const {nickname, users} = this.state;
