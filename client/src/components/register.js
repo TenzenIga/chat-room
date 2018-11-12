@@ -1,5 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 
 
@@ -26,10 +30,21 @@ class Register extends React.Component {
 
     render (){
       return (
-      <form onSubmit= {this.handleSubmit} >
-      <input onChange={this.handleChange} type='text' name='nickname' />
-      <button>Submit</button>
-      </form>
+        <Paper className='register-form' elevation={3} >
+          <Typography className='register-form__heading' variant='h5'>
+            Got a nickname?
+          </Typography>
+          <form className='register-form__form' onSubmit= {this.handleSubmit} >
+            <TextField className='register-form__input'
+                id="standard-name"
+                label="Nickname"
+                value={this.state.nickname}
+                onChange={this.handleChange}
+                margin="normal"
+              />
+          </form>
+        </Paper>
+
     )
     }
   }

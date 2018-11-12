@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Layout from './components/layout';
 import Register from './components/register';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:5000');
@@ -11,6 +13,7 @@ class App extends Component {
   constructor(props){
   super(props);
     this.state={
+    mobileOpen: false,
     nickname:'',
     roomId:'',
     users:[]
@@ -26,6 +29,10 @@ class App extends Component {
       nickname
     })
   }
+
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+  };
 
 sendMessage = (message)=>{
   const {roomId} = this.state;
@@ -49,10 +56,11 @@ joinRoom = (roomId)=>{
      socket.on('join', (message) =>console.log(message))
   }
   render() {
-  const {nickname, users} = this.state;
-  const layout = this.state.nickname ? <Layout nickname={nickname} users={users} socket={socket} joinRoom={this.joinRoom} sendMessage={this.sendMessage} /> : <Register registerUser ={this.registerUser}/>
+  const {nickname, users, mobileOpen} = this.state;
+  const layout = this.state.nickname ? <Layout mobileOpen={mobileOpen} handleDrawerToggle={this.handleDrawerToggle} nickname={nickname} users={users} socket={socket} joinRoom={this.joinRoom} sendMessage={this.sendMessage} /> : <Register registerUser ={this.registerUser}/>
     return (
       <div className="App">
+        <CssBaseline />
         {layout}
       </div>
     );

@@ -45,7 +45,7 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     usersList = usersList.filter(user => user !== socket.nickname)
-    io.sockets.in(socket).emit('join', `${socket.nickname} joined room ${roomId}`);
+    //io.sockets.in(socket).emit('', `${socket.nickname} left`);
    console.log(`user ${socket.nickname} disconnected`);
    console.log(usersList);
  });

@@ -5,16 +5,16 @@ import Sidebar from './sidebar';
 import Messages from './messages';
 import MessageInput from './messageInput';
 import JoinRoom from './joinRoom';
-const Layout = ({socket, nickname, sendMessage, joinRoom}) => {
+const Layout = ({mobileOpen, handleDrawerToggle, socket, nickname, sendMessage, joinRoom}) => {
   return (
     <div>
-    <Header socket={socket} nickname={nickname} />
-  <main className='chat-container'>
-    <JoinRoom joinRoom={joinRoom}/>
-    <Messages />
-      <Sidebar />
+  <Header socket={socket} nickname={nickname} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+    <main className='chat-container'>
+        <Messages />
+      <Sidebar joinRoom={joinRoom} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen} />
+
       <MessageInput sendMessage={sendMessage} />
-  </main>
+    </main>
     </div>
   );
 }
