@@ -1,0 +1,8 @@
+module.exports = {
+   JOIN:"JOIN",
+ GET_USERS:"GET_USERS",
+MESSAGE:"MESSAGE",
+ADD_USER:"ADD_USER",
+LEAVE:"LEAVE",
+TYPING:"TYPING"
+}

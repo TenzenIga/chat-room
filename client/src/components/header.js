@@ -26,20 +26,20 @@ const styles = theme => ({
 class Header extends React.Component {
   constructor(props){
     super(props)
-
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
   }
 
-  handleDrawerToggle = () => {
+  handleDrawerToggle(){
     this.props.handleDrawerToggle();
   }
 
   render(){
-    const { classes, nickname, socket} = this.props;
+    const { classes, nickname, roomId} = this.props;
     return (
       <AppBar position="fixed" className={classes.root} >
         <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow} >
-        Chat Room {socket.id}
+        Chat Room id {roomId}
             </Typography>
             <Typography variant="h6" color="inherit"  >
               {nickname}
@@ -57,4 +57,11 @@ class Header extends React.Component {
       )
     }
   }
+
+  Header.propTypes = {
+    handleDrawerToggle:PropTypes.func.isRequired,
+    roomId:PropTypes.string.isRequired,
+    nickname:PropTypes.string.isRequired,
+    classes:PropTypes.object.isRequired,
+  };
 export default withStyles(styles, { withTheme: true })(Header);

@@ -42,13 +42,3 @@ p{
   .chat-container{
     display: flex;
   }
-  
-  .messageInput{
-    margin-right: 240px;
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }

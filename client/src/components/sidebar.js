@@ -16,7 +16,6 @@ const styles = theme => ({
   root: {
     width:'100%',
     maxWidth: 360,
-
 },
   drawerPaper: {
     width: drawerWidth,
@@ -34,35 +33,27 @@ const styles = theme => ({
 class Sidebar extends React.Component {
   constructor(props){
     super(props)
-
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
   }
 
-  handleDrawerToggle = () => {
+  handleDrawerToggle(){
     this.props.handleDrawerToggle();
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, users, roomId } = this.props;
 
     const drawer = (
       <div className={classes.root}>
         <List>
           <li>
-            <JoinRoom joinRoom={this.props.joinRoom} />
+            <JoinRoom roomId={roomId} joinRoom={this.props.joinRoom} />
           </li>
   </List>
 <Divider />
 <List subheader={<ListSubheader>Users</ListSubheader>}>
 <Divider />
-<ListItem>
-<ListItemText primary='Zeta' />
-</ListItem>
-<ListItem>
-<ListItemText primary='King' />
-</ListItem>
-
-
-
+  {users.map((user, key) =><ListItem key={key}> <ListItemText primary={user.nickname}  /></ListItem>)}
 </List>
 </div>
     );
@@ -74,7 +65,7 @@ class Sidebar extends React.Component {
           <Hidden smUp implementation="css">
             <Drawer
               anchor="right"
-              container={this.props.container}
+
               variant="temporary"
               open={this.props.mobileOpen}
               onClose={this.handleDrawerToggle}
@@ -105,6 +96,11 @@ class Sidebar extends React.Component {
     );
   }
 }
-
+Sidebar.propTypes = {
+  mobileOpen: PropTypes.bool.isRequired,
+  handleDrawerToggle:PropTypes.func.isRequired,
+  users:PropTypes.array.isRequired,
+  roomId:PropTypes.string.isRequired
+};
 
 export default withStyles(styles)(Sidebar);

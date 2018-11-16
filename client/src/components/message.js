@@ -1,44 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 
+import { withStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 const styles = theme => ({
-  root: {
+    root: {
     ...theme.mixins.gutters(),
 
-  },
-  wrapper:{
-    wordWrap:'break-word',
+    },
+    wrapper:{
     display:'flex',
-    justifyContent:'flex-start',
 
-  },
-  message:{
+    },
+    message:{
     wordWrap:'break-word',
     whiteSpace:'pre-line',
     maxWidth:'calc(100% - 40px)',
-  },
-});
+    },
+  });
 
 const Message = (props) => {
   const { classes } = props;
   return (
-    <Paper className={classes.root}  elevation={1}>
-      <div className={classes.wrapper} >
-    <Typography variant='h6' color='textSecondary'>
-      {props.user}:
-       </Typography>
-       <Typography variant="h6" className={classes.message} color='textPrimary'>
-         {props.message}
-       </Typography>
-       </div>
-       <Typography variant='subtitle2' align='right'>
-         23:00
-       </Typography>
-    </Paper>
+    <ListItem className={classes.root}>
+    <ListItemText variant='h6' color='textSecondary'
+      primary={`${props.user}: ${props.message}`}
+      secondary={props.time} />
+    </ListItem>
   )
 }
+
+Message.propTypes = {
+  classes:PropTypes.object.isRequired,
+  message:PropTypes.string.isRequired,
+  user:PropTypes.string.isRequired,
+  time:PropTypes.string.isRequired
+};
 
 export default withStyles(styles)(Message);

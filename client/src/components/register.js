@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+
 
 
 
@@ -31,8 +31,8 @@ class Register extends React.Component {
     render (){
       return (
         <Paper className='register-form' elevation={3} >
-          <Typography className='register-form__heading' variant='h5'>
-            Got a nickname?
+          <Typography className='register-form__heading' align='center' variant='h5'>
+            Enter nickname
           </Typography>
           <form className='register-form__form' onSubmit= {this.handleSubmit} >
             <TextField className='register-form__input'
@@ -49,4 +49,7 @@ class Register extends React.Component {
     }
   }
 
+  Register.propTypes = {
+    registerUser:PropTypes.func.isRequired,
+  };
 export default Register;

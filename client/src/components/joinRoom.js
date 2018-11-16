@@ -5,8 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+
 class JoinRoom extends React.Component {
   constructor(props){
     super(props)
@@ -44,29 +45,34 @@ class JoinRoom extends React.Component {
     })
   }
   render () {
+    const {roomId} = this.props;
   return (
     <div>
-        <Button fullWidth={true} onClick={this.handleClickOpen}>Join room</Button>
+        <Button fullWidth={true} onClick={this.handleClickOpen}>Join room/Invite Friend</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Enter Room</DialogTitle>
+          aria-labelledby="form-dialog-title" >
+          <DialogTitle id="form-dialog-title">Enter Room/Invite Friend</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To join room, please enter Room ID
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              value={this.state.roomId}
-              onChange={this.handleChange}
-              label="Room ID"
-              type="text"
-              fullWidth
-            />
+              <Typography variant='subtitle1' color='default'> To invite your friend provide your Room ID:<br /></Typography>
+              <Typography variant='caption' >{roomId}</Typography><br />
+            <Typography align='center' variant='h5'>OR</Typography><br />
+              <Typography variant='subtitle1'> To join room, please enter Room ID </Typography>
+
+            <form onSubmit={this.handleSubmit}>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                value={this.state.roomId}
+                onChange={this.handleChange}
+                label="Room ID"
+                type="text"
+                fullWidth
+              />
+            </form>
+
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -81,5 +87,8 @@ class JoinRoom extends React.Component {
   );
   }
 }
+JoinRoom.propTypes = {
+  joinRoom:PropTypes.func.isRequired,
+};
 
 export default JoinRoom;

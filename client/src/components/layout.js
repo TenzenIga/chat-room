@@ -4,19 +4,30 @@ import Header from './header';
 import Sidebar from './sidebar';
 import Messages from './messages';
 import MessageInput from './messageInput';
-import JoinRoom from './joinRoom';
-const Layout = ({mobileOpen, handleDrawerToggle, socket, nickname, sendMessage, joinRoom}) => {
+
+const Layout = ({mobileOpen, handleDrawerToggle, roomId, nickname, sendMessage, users, joinRoom, messages, typingUsers, sendTyping}) => {
   return (
     <div>
-  <Header socket={socket} nickname={nickname} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+  <Header roomId={roomId} nickname={nickname} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
     <main className='chat-container'>
-        <Messages />
-      <Sidebar joinRoom={joinRoom} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen} />
+        <Messages messages={messages} typingUsers={typingUsers} />
+      <Sidebar users={users} joinRoom={joinRoom} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen} roomId={roomId}/>
 
-      <MessageInput sendMessage={sendMessage} />
+      <MessageInput sendMessage={sendMessage} sendTyping={sendTyping} />
     </main>
     </div>
   );
 }
-
+Layout.propTypes = {
+  mobileOpen: PropTypes.bool.isRequired,
+  handleDrawerToggle:PropTypes.func.isRequired,
+  sendTyping:PropTypes.func.isRequired,
+  sendMessage:PropTypes.func.isRequired,
+  joinRoom:PropTypes.func.isRequired,
+  messages:PropTypes.array.isRequired,
+  users:PropTypes.array.isRequired,
+  typingUsers:PropTypes.array.isRequired,
+  roomId:PropTypes.string.isRequired,
+  nickname:PropTypes.string.isRequired
+};
 export default Layout
